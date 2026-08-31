@@ -4,3 +4,8 @@ dist
 .env.local
 .DS_Store
 functions/node_modules
+
+# credenciales de administrador — nunca al repo
+scripts/serviceAccountKey.json
+scripts/products.seed.json
+scripts/product-images/

@@ -1,0 +1,19 @@
+[
+  {
+    "id": "pack-mates-dia-maestro",
+    "name": "Plantilla para Mates — Día del Maestro 2026",
+    "price": 1000,
+    "category": "frases",
+    "tags": ["mate", "dia-del-maestro"],
+    "specs": [
+      "8 modelos",
+      "Formato PNG",
+      "Tamaño 6,5cm x 20cm",
+      "Vienen sin texto — incluye la fuente",
+      "Incluye imágenes para promocionar"
+    ],
+    "description": "Set de 8 plantillas para sublimar mates pensadas para el Día del Maestro. Alta resolución, fondo transparente, y la fuente usada incluida para que puedas personalizar el texto de cada diseño.",
+    "images": ["pack-mates-dia-maestro/1.jpg", "pack-mates-dia-maestro/2.jpg"],
+    "finalFile": "pack-mates-dia-maestro/pack-mates-dia-maestro.zip"
+  }
+]

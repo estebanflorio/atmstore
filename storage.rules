@@ -3,14 +3,16 @@ service firebase.storage {
   match /b/{bucket}/o {
 
     // Previews del catálogo: públicas (baja resolución / con marca de agua).
-    match /previews/{fileName} {
+    // {fileName=**} matchea cualquier profundidad — las subimos organizadas
+    // por producto: previews/{productId}/1.jpg, previews/{productId}/2.jpg...
+    match /previews/{fileName=**} {
       allow read: if true;
       allow write: if false;
     }
 
     // Archivos finales: nunca públicos. Solo se accede vía signed URL
     // generada por la Function después de verificar el pago.
-    match /final/{fileName} {
+    match /final/{fileName=**} {
       allow read, write: if false;
     }
   }

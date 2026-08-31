@@ -37,12 +37,29 @@ functions/     Firebase Functions (Mercado Pago) — stub, ver TODOs en index.js
 firestore.rules / storage.rules   Reglas de acceso
 ```
 
+## Cargar productos reales
+
+```bash
+cp scripts/products.seed.example.json scripts/products.seed.json
+```
+Completá ese archivo con tus productos. Poné las imágenes (y el `.zip` final si ya lo tenés) en `scripts/product-images/<id-del-producto>/`, referenciadas con paths relativos desde ahí.
+
+Necesitás una clave de servicio de Firebase (Console → ⚙️ Configuración del proyecto → Cuentas de servicio → "Generar nueva clave privada") guardada como `scripts/serviceAccountKey.json` — nunca se commitea, ya está en `.gitignore`.
+
+Editá `STORAGE_BUCKET` al principio de `scripts/seed-products.js` con el mismo valor de `VITE_FIREBASE_STORAGE_BUCKET` de tu `.env`, y corré:
+
+```bash
+npm run seed
+```
+
+Podés correrlo de nuevo cuando quieras — hace upsert por `id`, no duplica productos. Las imágenes quedan públicas en `previews/<id>/`; el `.zip` final (si lo subís) queda privado en `final/<id>.zip`, listo para cuando conectemos la entrega por Mercado Pago.
+
 ## Qué falta conectar
 
 | Pieza | Estado | Dónde |
 |---|---|---|
-| Catálogo real | Falta cargar productos en Firestore (colección `products`) | Firebase Console o un script de seed |
-| Preview images | Falta subir los archivos y usar sus URLs | Firebase Storage, carpeta `previews/` |
+| Catálogo real | Resuelto — ver sección "Cargar productos reales" arriba | `npm run seed` |
+| Preview images | Resuelto — las sube el mismo script | `scripts/product-images/` |
 | Crear preferencia de pago | Stub sin implementar | `functions/index.js` → `createPreference` |
 | Webhook de Mercado Pago | Stub sin implementar | `functions/index.js` → `mercadopagoWebhook` |
 | Envío del link de descarga | No implementado | Dentro del webhook, una vez verificado el pago |
