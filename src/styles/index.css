@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink text-paper font-mono antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+  :focus-visible {
+    outline: 2px solid theme('colors.lime');
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Marca de registro: motivo de las esquinas, evoca las cruces de calibración
+     de color que se usan en impresión / sublimación. Uso puntual, no decorativo. */
+  .reg-mark {
+    position: relative;
+  }
+  .reg-mark::before,
+  .reg-mark::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid theme('colors.violet');
+    opacity: 0.7;
+  }
+  .reg-mark::before {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .reg-mark::after {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
+  }
+}

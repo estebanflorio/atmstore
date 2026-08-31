@@ -1,0 +1,17 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Previews del catálogo: públicas (baja resolución / con marca de agua).
+    match /previews/{fileName} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Archivos finales: nunca públicos. Solo se accede vía signed URL
+    // generada por la Function después de verificar el pago.
+    match /final/{fileName} {
+      allow read, write: if false;
+    }
+  }
+}
