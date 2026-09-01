@@ -8,11 +8,13 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // Órdenes: nadie lee/escribe directo desde el cliente.
-    // Se crean y actualizan únicamente desde las Functions (Admin SDK,
-    // que no pasa por estas reglas).
+    // Órdenes: se crean y actualizan únicamente desde las Functions (Admin
+    // SDK, que no pasa por estas reglas). Un usuario logueado sí puede LEER
+    // sus propios pedidos — se los identifica por email, no por userId,
+    // porque el checkout es libre (no hace falta cuenta para comprar).
     match /orders/{orderId} {
-      allow read, write: if false;
+      allow read: if request.auth != null && request.auth.token.email == resource.data.email;
+      allow write: if false;
     }
   }
 }

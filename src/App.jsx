@@ -5,6 +5,8 @@ import { ProductDetail } from './pages/ProductDetail'
 import { Cart } from './pages/Cart'
 import { Checkout } from './pages/Checkout'
 import { ThankYou } from './pages/ThankYou'
+import { Login } from './pages/Login'
+import { MisCompras } from './pages/MisCompras'
 
 export default function App() {
   return (
@@ -15,6 +17,8 @@ export default function App() {
         <Route path="/carrito" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/gracias" element={<ThankYou />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/mis-compras" element={<MisCompras />} />
       </Routes>
     </Layout>
   )
