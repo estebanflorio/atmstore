@@ -5,15 +5,18 @@ service firebase.storage {
     // Previews del catálogo: públicas (baja resolución / con marca de agua).
     // {fileName=**} matchea cualquier profundidad — las subimos organizadas
     // por producto: previews/{productId}/1.jpg, previews/{productId}/2.jpg...
+    // Escritura solo para administradores.
     match /previews/{fileName=**} {
       allow read: if true;
-      allow write: if false;
+      allow write: if request.auth != null && request.auth.token.admin == true;
     }
 
-    // Archivos finales: nunca públicos. Solo se accede vía signed URL
-    // generada por la Function después de verificar el pago.
+    // Archivos finales: nunca públicos para lectura — solo se acceden vía
+    // signed URL generada por la Function después de verificar el pago.
+    // Escritura solo para administradores (subir el .zip del producto).
     match /final/{fileName=**} {
-      allow read, write: if false;
+      allow read: if false;
+      allow write: if request.auth != null && request.auth.token.admin == true;
     }
   }
 }

@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext'
 
 export function Header() {
   const { items, setIsOpen } = useCart()
-  const { user } = useAuth()
+  const { user, isAdmin } = useAuth()
 
   return (
     <header className="sticky top-0 z-40 bg-lime">
@@ -16,6 +16,9 @@ export function Header() {
         <nav className="hidden md:flex items-center gap-8 text-sm text-white/80">
           <Link to="/" className="hover:text-white transition-colors">Catálogo</Link>
           <a href="#faq" className="hover:text-white transition-colors">Licencias</a>
+          {isAdmin && (
+            <Link to="/admin" className="hover:text-white transition-colors">Admin</Link>
+          )}
         </nav>
         <div className="flex items-center gap-2">
           <Link

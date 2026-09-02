@@ -29,6 +29,7 @@ function friendlyError(err) {
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
+  const [isAdmin, setIsAdmin] = useState(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -38,8 +39,16 @@ export function AuthProvider({ children }) {
       setLoading(false)
       return
     }
-    const unsub = onAuthStateChanged(auth, (u) => {
+    const unsub = onAuthStateChanged(auth, async (u) => {
       setUser(u)
+      if (u) {
+        // El custom claim "admin" se asigna con scripts/set-admin.js — no
+        // se puede setear desde el cliente, así que es seguro confiar en él.
+        const token = await u.getIdTokenResult()
+        setIsAdmin(token.claims.admin === true)
+      } else {
+        setIsAdmin(false)
+      }
       setLoading(false)
     })
     return unsub
@@ -80,7 +89,7 @@ export function AuthProvider({ children }) {
     await firebaseSignOut(auth)
   }
 
-  const value = { user, loading, signInWithGoogle, signInWithEmail, registerWithEmail, signOut }
+  const value = { user, isAdmin, loading, signInWithGoogle, signInWithEmail, registerWithEmail, signOut }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

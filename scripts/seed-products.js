@@ -15,7 +15,9 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import admin from 'firebase-admin'
+import { initializeApp, cert } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
+import { getStorage } from 'firebase-admin/storage'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -45,13 +47,13 @@ if (!fs.existsSync(seedPath)) {
 const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf-8'))
 const products = JSON.parse(fs.readFileSync(seedPath, 'utf-8'))
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+initializeApp({
+  credential: cert(serviceAccount),
   storageBucket: STORAGE_BUCKET
 })
 
-const db = admin.firestore()
-const bucket = admin.storage().bucket()
+const db = getFirestore()
+const bucket = getStorage().bucket()
 
 async function uploadPublic(localPath, destPath) {
   await bucket.upload(localPath, {
