@@ -1,15 +1,6 @@
 import { Phone, Mail } from 'lucide-react'
 import { InstagramIcon, FacebookIcon } from '../ui/SocialIcons'
-
-// TODO: reemplazar los placeholders (teléfono, mail, usuarios de redes)
-// por los datos reales de atmstore.
-const CONTACT = {
-  whatsapp: '541136189525', // sin espacios, guiones ni "+"
-  instagram: 'https://instagram.com/atumanera.sublimados',
-  facebook: 'https://facebook.com/atm.sublimados',
-  email: 'hola@emprendeatumanera.com.ar', // TODO: confirmar cuando tengas la casilla de Zoho lista
-  phoneDisplay: '11 3618-9525'
-}
+import { CONTACT } from '../../lib/contact'
 
 export function Footer() {
   return (

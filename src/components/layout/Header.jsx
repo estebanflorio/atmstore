@@ -10,8 +10,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 bg-lime">
       <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="font-display text-lg tracking-tight text-white">
-          Plantillas.
+        <Link to="/" className="font-display text-base sm:text-lg tracking-tight text-white whitespace-nowrap">
+          Emprende a tu manera
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm text-white/80">
           <Link to="/" className="hover:text-white transition-colors">Catálogo</Link>
@@ -30,11 +30,11 @@ export function Header() {
           </Link>
           <button
             onClick={() => setIsOpen(true)}
-            className="flex items-center gap-2 px-3 py-1.5 text-sm text-white border border-white/50 hover:border-white hover:bg-white/10 transition-colors"
+            className="flex items-center gap-2 px-3 py-1.5 text-sm text-white border border-white/50 hover:border-white hover:bg-white/10 transition-colors whitespace-nowrap"
             aria-label="Abrir carrito"
           >
             <ShoppingBag size={16} />
-            Carrito ({items.length})
+            <span className="hidden sm:inline">Carrito </span>({items.length})
           </button>
         </div>
       </div>
